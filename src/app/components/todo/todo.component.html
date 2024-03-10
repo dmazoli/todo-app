@@ -1,0 +1,9 @@
+<div class="container w-100">
+
+  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
+       class="list" (cdkDropListDropped)="drop($event)">
+    @for (item of todo; track item) {
+      <div class="list-item" cdkDrag>{{item}}</div>
+    }
+  </div>
+</div>
