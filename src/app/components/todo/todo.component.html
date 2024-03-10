@@ -4,8 +4,6 @@
     cdkDropList
     #todoList="cdkDropList"
     class="col justify-content-center p-2 m-5"
-    [cdkDropListData]="todo"
-    (cdkDropListDropped)="drop($event)"
   >
     <mat-card-header>
       <mat-card-title>
@@ -16,8 +14,14 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      @for (item of todo; track item) {
-        <app-task class="cols-12 row-md-6" cdkDrag></app-task>
+      @if (this.tasksService.loading$ | async) {
+        <div class="d-flex justify-content-center align-content-between col-12 my-5">
+          <mat-spinner></mat-spinner>
+        </div>
+      } @else {
+        @for (item of this.tasksService.tasks$ | async; track item) {
+          <app-task class="col-12 col-md-6" cdkDrag></app-task>
+        }
       }
     </mat-card-content>
 

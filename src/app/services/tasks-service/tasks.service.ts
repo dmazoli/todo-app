@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpStatusCode} from "@angular/common/http";
-import {BehaviorSubject, map, Observable, tap} from "rxjs";
+import {BehaviorSubject, delay, map, Observable, tap} from "rxjs";
 import {TaskInterface} from "../../interfaces/task.interface";
 import {environment} from "../../../environments/environment";
 
@@ -29,6 +29,7 @@ export class TasksService {
         data,
         {observe: 'body'})
       .pipe(
+        delay(500),
         tap(() => {
           this.loading$.next(false);
         })
@@ -42,6 +43,7 @@ export class TasksService {
         `${this.baseUrl}/${this.tasksApiPath}/${id}`,
         {observe: 'body'})
       .pipe(
+        delay(500),
         map(
           (rawTask) => {
             (!rawTask.description) ? rawTask.description = 'low' : null;
@@ -61,6 +63,7 @@ export class TasksService {
         data,
         {observe: 'body'})
       .pipe(
+        delay(500),
         tap(() => {
           this.loading$.next(false);
         })
@@ -74,12 +77,13 @@ export class TasksService {
         `${this.baseUrl}/${this.tasksApiPath}/${id}`,
         {observe: 'response'})
       .pipe(
+        delay(500),
         map(
           (deleteResponse) => {
             return deleteResponse.status == HttpStatusCode.NoContent;
           }
         ),
-        tap((task) => {
+        tap(() => {
           this.loading$.next(false);
         })
       );
@@ -87,11 +91,13 @@ export class TasksService {
 
   listTasks(): Observable<TaskInterface[]> {
     this.loading$.next(true);
+    console.log('carregando');
     return this.http
       .get<TaskInterface[]>(
         `${this.baseUrl}/${this.tasksApiPath}`,
         {observe: 'body'})
       .pipe(
+        delay(500),
         map(
           (rawList) => rawList.map((item) => {
             (!item.description) ? item.description = 'low' : null;
@@ -104,8 +110,4 @@ export class TasksService {
         })
       );
   }
-
-
-
-
 }
