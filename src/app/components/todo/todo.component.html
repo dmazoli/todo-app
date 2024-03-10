@@ -1,9 +1,25 @@
-<div class="container w-100">
+<div class="container justify-content-center">
 
-  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
-       class="list" (cdkDropListDropped)="drop($event)">
-    @for (item of todo; track item) {
-      <div class="list-item" cdkDrag>{{item}}</div>
-    }
-  </div>
+  <mat-card
+    cdkDropList
+    #todoList="cdkDropList"
+    class="col justify-content-center p-2 m-5"
+    [cdkDropListData]="todo"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <mat-card-header>
+      <mat-card-title>
+        Tarefas
+      </mat-card-title>
+      <mat-card-subtitle>
+        Adicionar uma nova tarefa
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      @for (item of todo; track item) {
+        <app-task class="cols-12 row-md-6" cdkDrag></app-task>
+      }
+    </mat-card-content>
+
+  </mat-card>
 </div>

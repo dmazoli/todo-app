@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { CdkDrag, CdkDropList, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {TaskComponent} from "../task/task.component";
+import {MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css',
   standalone: true,
-  imports: [CdkDrag, CdkDropList]
+  imports: [CdkDrag, CdkDropList, TaskComponent, MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent]
 })
 export class TodoComponent {
   todo = [
