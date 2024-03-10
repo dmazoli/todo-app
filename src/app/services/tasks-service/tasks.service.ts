@@ -29,7 +29,7 @@ export class TasksService {
         data,
         {observe: 'body'})
       .pipe(
-        tap((task) => {
+        tap(() => {
           this.loading$.next(false);
         })
       );
@@ -46,9 +46,9 @@ export class TasksService {
           (rawTask) => {
             (!rawTask.description) ? rawTask.description = 'low' : null;
             return rawTask;
-          })
+          }
         ),
-        tap((task) => {
+        tap(() => {
           this.loading$.next(false);
         })
       );
@@ -61,7 +61,7 @@ export class TasksService {
         data,
         {observe: 'body'})
       .pipe(
-        tap((task) => {
+        tap(() => {
           this.loading$.next(false);
         })
       );
